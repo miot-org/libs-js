@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "streetsidesoftware.code-spell-checker",
+        "executablebookproject.myst-highlight",
+        "ryanluker.vscode-coverage-gutters"
+    ]
+}

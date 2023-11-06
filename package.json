@@ -1,0 +1,62 @@
+{
+  "name": "@x-ware-ltd/template-typescript-node-library",
+  "version": "0.0.10",
+  "description": "template node package for Typescript library development",
+  "type": "module",
+  "main": "./lib/cjs/index.js",
+  "types": "./lib/cjs/types/index.d.ts",
+  "module": "./lib/esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.js"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x-ware-ltd/template-typescript-node-library.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "build": "node ./scripts/rm-rf.js ./lib && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node ./scripts/post-build.js",
+    "spellcheck": "cspell **/* --dot",
+    "mocha": "mocha --loader=ts-node/esm -r ts-node/register tests/**/*.spec.ts",
+    "mocha:cov": "node ./scripts/rm-rf.js ./coverage && c8 npm run mocha",
+    "mocha:view": "npm run mocha:cov && start coverage/index.html",
+    "eslint": "eslint src/**/*.{ts,tsx}",
+    "eslint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "test": "npm run spellcheck && npm run eslint && npm run mocha:cov",
+    "prepare": "npm test && npm run build",
+    "clean": "node ./scripts/rm-rf.js ./lib ./coverage"
+  },
+  "keywords": [
+    "boilerplate",
+    "typescript"
+  ],
+  "author": "X-Ware Limited",
+  "license": "ISC",
+  "devDependencies": {
+    "@shopify/eslint-plugin": "^43.0.0",
+    "@types/chai": "^4.3.9",
+    "@types/mocha": "^10.0.3",
+    "c8": "^8.0.1",
+    "chai": "^4.3.10",
+    "cspell": "^7.3.8",
+    "eslint": "^8.52.0",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

@@ -1,0 +1,31 @@
+dictionaryDefinitions:
+
+dictionaries:
+  - typescript
+
+language: en-gb
+
+words:
+  - mdprepare
+  - fsnip
+  - lcov
+  - tsdoc
+
+ignorePaths:
+  - package*.json
+  - "*config*.*{json,js,yaml,yml}"
+  - "*conf.*{json,js,yaml,yml}"
+  - .git/**
+  - .github/**
+  - .vscode/**
+  - .coveralls.yml
+  - .*rc
+  - "**.tgz"
+  
+ignoreRegExpList:
+  - Urls
+  - HexValues
+  - Base64
+  - Email
+
+useGitignore: true
