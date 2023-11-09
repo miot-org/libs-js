@@ -1,7 +1,7 @@
 {
-  "name": "@x-ware-ltd/template-typescript-node-library",
-  "version": "0.0.10",
-  "description": "template node package for Typescript library development",
+  "name": "@miot-org/libs-js",
+  "version": "0.0.1",
+  "description": "A collection of library functions useful for MIoT development in javascript and typescript",
   "type": "module",
   "main": "./lib/cjs/index.js",
   "types": "./lib/cjs/types/index.d.ts",
@@ -23,7 +23,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/x-ware-ltd/template-typescript-node-library.git"
+    "url": "git+https://github.com/miot-org/libs-js.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -31,8 +31,9 @@
   "scripts": {
     "build": "node ./scripts/rm-rf.js ./lib && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node ./scripts/post-build.js",
     "spellcheck": "cspell **/* --dot",
-    "mocha": "mocha --loader=ts-node/esm -r ts-node/register tests/**/*.spec.ts",
-    "mocha:cov": "node ./scripts/rm-rf.js ./coverage && c8 npm run mocha",
+    "mocha": "mocha --loader=ts-node/esm -r ts-node/register -exclude tests/**/*.slow.spec.ts tests/**/*.spec.ts",
+    "mocha:all": "mocha --loader=ts-node/esm -r ts-node/register tests/**/*.spec.ts",
+    "mocha:cov": "node ./scripts/rm-rf.js ./coverage && c8 npm run mocha:all",
     "mocha:view": "npm run mocha:cov && start coverage/index.html",
     "eslint": "eslint src/**/*.{ts,tsx}",
     "eslint:fix": "eslint src/**/*.{ts,tsx} --fix",
@@ -41,11 +42,13 @@
     "clean": "node ./scripts/rm-rf.js ./lib ./coverage"
   },
   "keywords": [
-    "boilerplate",
-    "typescript"
+    "library",
+    "typescript",
+    "javascript",
+    "miot"
   ],
-  "author": "X-Ware Limited",
-  "license": "ISC",
+  "author": "miot.org",
+  "license": "MIT",
   "devDependencies": {
     "@shopify/eslint-plugin": "^43.0.0",
     "@types/chai": "^4.3.9",
@@ -58,5 +61,8 @@
     "mocha": "^10.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "is-unicode-supported": "^2.0.0"
   }
 }

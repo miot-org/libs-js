@@ -1,43 +1,9 @@
-# Template ESM Typescript library
-
-A template used for projects which produce both CommonJS and ESM packages from a common Typescript ESM codebase.
-
-Includes testing, coverage, coveralls.io, linting, TSDoc and auto creation of a package on creating a github release.
-
-If you are creating a new project from this template, instructions are [here](./INSTRUCTIONS.md).
-
-[![Typescript](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF)](https://www.typescriptlang.org/)
-[![Node.js CI](https://github.com/x-ware-ltd/template-typescript-node-library/actions/workflows/linux-ci.yml/badge.svg)](https://github.com/x-ware-ltd/template-typescript-node-library/actions/workflows/linux-ci.yml)
-[![Node.js CI](https://github.com/x-ware-ltd/template-typescript-node-library/actions/workflows/windows-ci.yml/badge.svg)](https://github.com/x-ware-ltd/template-typescript-node-library/actions/workflows/windows-ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/x-ware-ltd/template-typescript-node-library/badge.svg?branch=main)](https://coveralls.io/github/x-ware-ltd/template-typescript-node-library?branch=main)
+# MIoT library of useful Javascript/Typescript functions
 
 ## Install
 
-This is a github hosted package so you need to add an entry to your `.npmrc` file so the package manager knows where to download the package from:
-        
-```ini
-@x-ware-ltd:registry=https://npm.pkg.github.com
-```
-Then:
-
 ```console
-> npm install @x-ware-ltd/template-typescript-node-library
-```
-
-If the package is `private` you need to authenticate to github by getting a Personal Access Token from github with `read:packages` permissions. Either login for the session, which will request your github username, and password (use your Personal Access Token):
-```console
-> npm login --scope=@x-ware-ltd --registry=https://npm.pkg.github.com
-```
-
-Or, create a personal `.npmrc` file in your home directory:
-```ini
-//npm.pkg.github.com/:_authToken=aaa_abcDeFghIjklMNopqRSTuvWXYz
-```
-
-If you are running CI/CD on your package you will need to provide credentials for the server. Save a Personal Access Token in your Github secrets and in your github actions:
-```
-- name: Authenticate private github packages
-  run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.PACKAGE_READ_TOKEN }}" > ~/.npmrc
+> npm install @miot-org/libs-js
 ```
 
 ## Features
@@ -48,21 +14,82 @@ If you are running CI/CD on your package you will need to provide credentials fo
 ## Usage
 ESM:
 ```js
-import {add} from '@x-ware-ltd/template-typescript-node-library';
+import {log} from '@miot-org/libs-js';
 
-console.log(add(3, 5)); // 8
+log.info('Completed something');
 ```
 
 CommonJS:
 ```js
-var lib = require('@x-ware-ltd/template-typescript-node-library');
+var log = require('@miot-org/libs-js').log;
 
-console.log(lib.add(3, -1)); // 2
+log.info('Completed something');
 ```
 
 ## API Reference
 
-Documentation for `add` and `subtract` methods can be found in TSDoc for each
+### argv
+
+The argv function extracts values passed in via the command line
+
+If the command line is `node my-app.js --port 8080 -n -tf`
+
+```js
+import {argv} from '@miot-org/libs-js';
+
+console.log(argv('--port')) // => '8080'
+console.log(argv('-n')); // => true
+console.log(argv('-g')); // => false
+console.log(argv('-t')); // => false
+console.log(argv('-f')); // => false
+console.log(argv('-tf')); // => true
+```
+
+### config
+
+config() provides a way to access the current configuration without using `process.env`.
+
+```js
+import {config} from '@miot-org/libs-js';
+
+console.log(config.env); // => 'development' (or could be 'production') 
+```
+
+### Logger
+
+Logger provides a way to annotate code to provide logging, but also allows logging to be turn off (or down) depending on requirements.
+
+#### Using in your code:
+
+```js
+import {log} from '@miot-org/libs-js';
+
+log.warn('file failed to download');
+log.success('task completed');
+const i = 5;
+log.debug('i:', i);
+```
+
+Assuming your application is started with a logging level of 'warn' or 2, the following will be output from the above code:
+
+<pre style="background-color: Night;">
+  0:00:00.071 <span style="color:yellow;">⚠</span> file failed to download
+</pre>
+
+Whereas if your application is started with a logging level of 'debug' or 5:
+
+<pre style="background-color: Night;">
+  0:00:00.071 <span style="color:yellow;">⚠</span> file failed to download
+  0:00:00.074 <span style="color:green;">✔</span> task completed
+  0:00:00.074 <span style="color:cyan;">●</span> i: 5
+</pre>
+
+#### Initialising log level on the command line
+
+```command
+> node ./src/temp.js --loglevel 2
+> node ./src/temp.js --loglevel debug
+```
 
 ## Contributing
 

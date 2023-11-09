@@ -1,7 +1,9 @@
-import {add} from './add.js';
-import {subtract} from './subtract.js';
+import {config} from './config.js';
+import {log} from './logger.js';
+import {argv} from './argv.js';
 
 export {
-  add,
-  subtract,
+  config,
+  log,
+  argv,
 };

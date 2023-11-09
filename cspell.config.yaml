@@ -10,6 +10,8 @@ words:
   - fsnip
   - lcov
   - tsdoc
+  - miot-org
+  - loglevel
 
 ignorePaths:
   - package*.json
