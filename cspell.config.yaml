@@ -10,7 +10,7 @@ words:
   - fsnip
   - lcov
   - tsdoc
-  - miot-org
+  - ortac
   - loglevel
 
 ignorePaths:

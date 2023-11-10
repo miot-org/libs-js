@@ -1,9 +1,9 @@
-# MIoT library of useful Javascript/Typescript functions
+# Ortac library of useful Javascript/Typescript functions
 
 ## Install
 
 ```console
-> npm install @miot-org/libs-js
+> npm install @ortac/libs-js
 ```
 
 ## Features
@@ -14,14 +14,14 @@
 ## Usage
 ESM:
 ```js
-import {log} from '@miot-org/libs-js';
+import {log} from '@ortac/libs-js';
 
 log.info('Completed something');
 ```
 
 CommonJS:
 ```js
-var log = require('@miot-org/libs-js').log;
+var log = require('@ortac/libs-js').log;
 
 log.info('Completed something');
 ```
@@ -35,7 +35,7 @@ The argv function extracts values passed in via the command line
 If the command line is `node my-app.js --port 8080 -n -tf`
 
 ```js
-import {argv} from '@miot-org/libs-js';
+import {argv} from '@ortac/libs-js';
 
 console.log(argv('--port')) // => '8080'
 console.log(argv('-n')); // => true
@@ -50,7 +50,7 @@ console.log(argv('-tf')); // => true
 config() provides a way to access the current configuration without using `process.env`.
 
 ```js
-import {config} from '@miot-org/libs-js';
+import {config} from '@ortac/libs-js';
 
 console.log(config.env); // => 'development' (or could be 'production') 
 ```
@@ -62,7 +62,7 @@ Logger provides a way to annotate code to provide logging, but also allows loggi
 #### Using in your code:
 
 ```js
-import {log} from '@miot-org/libs-js';
+import {log} from '@ortac/libs-js';
 
 log.warn('file failed to download');
 log.success('task completed');
