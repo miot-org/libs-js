@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {argv} from '../src/index.js';
+import {argv} from '../../src/index.js';
 
 describe('argv()', () => {
   it('it should return a setting after a selection', () => {
@@ -13,7 +13,7 @@ describe('argv()', () => {
   it('it should return true if a selection is present', () => {
     const temp = process.argv;
     process.argv = ['-t', '-yes'];
-    expect(argv('-t')).to.equal(true);
+    expect(argv('-yes')).to.equal(true);
     process.argv = temp;
   });
 

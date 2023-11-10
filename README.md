@@ -1,5 +1,10 @@
 # Ortac library of useful Javascript/Typescript functions
 
+[![Typescript](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF)](https://www.typescriptlang.org/)
+[![Node.js CI](https://github.com/ortac-org/libs-js/actions/workflows/linux-ci.yml/badge.svg)](https://github.com/ortac-org/libs-js/actions/workflows/linux-ci.yml)
+[![Node.js CI](https://github.com/ortac-org/libs-js/actions/workflows/windows-ci.yml/badge.svg)](https://github.com/ortac-org/libs-js/actions/workflows/windows-ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/ortac-org/libs-js/badge.svg?branch=main)](https://coveralls.io/github/ortac-org/libs-js?branch=main)
+
 ## Install
 
 ```console
