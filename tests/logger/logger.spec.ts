@@ -23,12 +23,12 @@ describe('Logger', () => {
   });
 
   const tests = [
-    {fn: log.error, level: 1, glyph: '[31m✖', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[31m✖\u001b\\[0m {2}some text\\n$'},
-    {fn: log.warn, level: 2, glyph: '[33m⚠', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[33m⚠\u001b\\[0m {2}some text\\n$'},
-    {fn: log.info, level: 3, glyph: '[34mℹ', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[34mℹ\u001b\\[0m {2}some text\\n$'},
-    {fn: log.success, level: 3, glyph: '[32m✔', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[32m✔\u001b\\[0m {2}some text\\n$'},
-    {fn: log.debug, level: 4, glyph: '[36m●', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[36m●\u001b\\[0m {2}some text\\n$'},
-    {fn: log.trace, level: 5, glyph: '[90m☰', regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[90m☰\u001b\\[0m {2}some text[\\s\\S]*$'},
+    {fn: log.error, level: 1, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[31m[✖x]\u001b\\[0m {2}some text\\n$'},
+    {fn: log.warn, level: 2, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[33m[⚠‼]\u001b\\[0m {2}some text\\n$'},
+    {fn: log.info, level: 3, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[34m[ℹi]\u001b\\[0m {2}some text\\n$'},
+    {fn: log.success, level: 3, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[32m[✔√]\u001b\\[0m {2}some text\\n$'},
+    {fn: log.debug, level: 4, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[36m[●•]\u001b\\[0m {2}some text\\n$'},
+    {fn: log.trace, level: 5, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[90m[☰≡]\u001b\\[0m {2}some text[\\s\\S]*$'},
   ];
 
   tests.forEach((test) => {
@@ -51,13 +51,14 @@ describe('Logger', () => {
   it('log.xxx() should use extended Unicode characters on supported consoles', () => {
     hook.clear();
     log.setLevel('warn');
+    // spoof process.env values so that it looks like we have a supported console (whatever platform we're running on)
     /* eslint-disable no-process-env */
-    const temp = process.env.TERM_PROGRAM;
-    process.env.TERM_PROGRAM = 'vscode';
+    const envTemp = process.env;
+    process.env = {TERM: 'not linux', TERM_PROGRAM: 'vscode'};
     hook.resume();
     log.warn('Unicode Glyph');
     hook.suspend();
-    process.env.TERM_PROGRAM = temp;
+    process.env = envTemp;
     /* eslint-enable no-process-env */
     // eslint-disable-next-line no-control-regex
     expect(hook.captured()).to.match(new RegExp('^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[33m⚠\u001b\\[0m {2}Unicode Glyph\n$'));
@@ -66,13 +67,14 @@ describe('Logger', () => {
   it('log.xxx() should use ascii Code Page 437 characters only (no extended Unicode) on unsupported consoles', () => {
     hook.clear();
     log.setLevel('warn');
+    // spoof process.env values so that it looks like we have a supported console (whatever platform we're running on)
     /* eslint-disable no-process-env */
-    const temp = process.env.TERM_PROGRAM;
-    process.env.TERM_PROGRAM = 'rubbish';
+    const envTemp = process.env;
+    process.env = {WT_SESSION: undefined, TERMINUS_SUBLIME: undefined, ConEmuTask: '{}', TERM_PROGRAM: '', TERM: 'linux', TERMINAL_EMULATOR: ''};
     hook.resume();
     log.warn('Ascii Glyph');
     hook.suspend();
-    process.env.TERM_PROGRAM = temp;
+    process.env = envTemp;
     /* eslint-enable no-process-env */
     // eslint-disable-next-line no-control-regex
     expect(hook.captured()).to.match(new RegExp('^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[33m‼\u001b\\[0m {2}Ascii Glyph\n$'));
@@ -119,7 +121,7 @@ describe('Logger', () => {
     }
     hook.suspend();
     // eslint-disable-next-line no-control-regex
-    expect(hook.captured()).to.match(new RegExp('^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[90m☰\u001b\\[0m {2}Error happened[\\s\\S]*$'));
+    expect(hook.captured()).to.match(new RegExp('^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[90m[☰≡]\u001b\\[0m {2}Error happened[\\s\\S]*$'));
   });
 });
 
