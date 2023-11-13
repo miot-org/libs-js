@@ -121,11 +121,16 @@ export const log = {
    * 3. 'notice', 'http', 'info', 'success' or 3
    * 4. 'debug', 'verbose' or 4
    * 5. 'trace', 'silly' or 5
+   * -1 resets log level to that set by the command line
    * @param level - string or numeric representing the required level of logging
    *
    */
   setLevel: (level: number | string | boolean) => {
-    log._level = _parseLogLevel(level);
+    if (level === -1) {
+      log._level = _parseLogLevel(argv('--loglevel'));
+    } else {
+      log._level = _parseLogLevel(level);
+    }
   },
 };
 

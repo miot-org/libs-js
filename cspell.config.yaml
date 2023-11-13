@@ -23,6 +23,7 @@ ignorePaths:
   - .coveralls.yml
   - .*rc
   - "**.tgz"
+  - "*locale.json"
   
 ignoreRegExpList:
   - Urls

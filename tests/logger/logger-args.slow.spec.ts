@@ -2,7 +2,7 @@ import {exec} from 'node:child_process';
 
 import {expect} from 'chai';
 
-describe('Logger command line arguments (slow due to child processes)', () => {
+describe('Logger command line arguments (slow due to using child processes)', () => {
   it('should accept numeric log level', (done) => {
     exec('node ./node_modules/mocha/bin/mocha.js --loader=ts-node/esm ./tests/logger/logger-test-script-1.ts --loglevel 2', {windowsHide: true, env: {NODE_ENV: 'production'}}, (err, stdOut, stdErr) => {
       expect(err).to.equal(null, 'error on calling child process exec');

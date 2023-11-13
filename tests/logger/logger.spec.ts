@@ -22,6 +22,11 @@ describe('Logger', () => {
     hook.unhook();
   });
 
+  after(() => {
+    // reset log level after tests complete
+    log.setLevel(-1);
+  });
+
   const tests = [
     {fn: log.error, level: 1, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[31m[✖x]\u001b\\[0m {2}some text\\n$'},
     {fn: log.warn, level: 2, regex: '^ {2}0:00:\\d{2}\\.\\d{3} \u001b\\[33m[⚠‼]\u001b\\[0m {2}some text\\n$'},

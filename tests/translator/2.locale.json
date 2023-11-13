@@ -1,0 +1,16 @@
+{
+  "fileLayout": {
+    "name": "oratc-locale",
+    "version": "1.0.0"
+  },
+  "author": "ortac.org",
+  "subject": "Additional English",
+  "version": "0.0.1",
+  "locales": {
+    "en-US": {
+      "phrases": {
+        "_imperial_gallons": "Wonderful Gallons"
+      }
+    }
+  }
+}

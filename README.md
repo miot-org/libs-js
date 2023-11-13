@@ -19,7 +19,7 @@
 ## Usage
 ESM:
 ```js
-import {log} from '@ortac/libs-js';
+import {argv, log} from '@ortac/libs-js';
 
 log.info('Completed something');
 ```
@@ -33,7 +33,7 @@ log.info('Completed something');
 
 ## API Reference
 
-### argv
+### Argv
 
 The argv function extracts values passed in via the command line
 
@@ -50,7 +50,7 @@ console.log(argv('-f')); // => false
 console.log(argv('-tf')); // => true
 ```
 
-### config
+### Config
 
 config() provides a way to access the current configuration without using `process.env`.
 
@@ -62,9 +62,11 @@ console.log(config.env); // => 'development' (or could be 'production')
 
 ### Logger
 
-Logger provides a way to annotate code to provide logging, but also allows logging to be turn off (or down) depending on requirements.
+Logger provides a way to annotate code to provide logging, but also allows logging to be turned off (or down) depending on requirements.
 
-#### Using in your code:
+#### Using logger in your code:
+
+Place log messages at the appropriate level throughout your code. If they don't log anything, they will run very quickly.
 
 ```js
 import {log} from '@ortac/libs-js';
@@ -91,10 +93,26 @@ Whereas if your application is started with a logging level of 'debug' or 5:
 
 #### Initialising log level on the command line
 
-```command
+When you start your code, the command line setting will determine the logging level. If none is set on the command line the default is 2 (warn) if in a 'production' environment, or 3 (info/success) if not.
+
+```cmd
 > node ./src/temp.js --loglevel 2
 > node ./src/temp.js --loglevel debug
 ```
+
+### Translator
+
+The Translator Class provides translations of phrases used in ortac systems across multiple locales.
+
+```js
+import {Translator} from '@ortac/libs-js';
+
+const translator = new Translator([{pattern: './**/localeFiles*.json'}]);
+
+console.log(translator.lookup('en-US', '_metres')); // => 'meters'
+```
+
+The Translator Class uses locale files per the ortac specification, currently supporting v1.0.0. The Class also provides for the ability to trace where the source of a particular translation has come from, and can also log all phrases passed into the translator.
 
 ## Contributing
 

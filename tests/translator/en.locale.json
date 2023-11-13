@@ -1,0 +1,149 @@
+{
+  "fileLayout": {
+    "name": "oratc-locale",
+    "version": "1.0.0"
+  },
+  "author": "ortac.org",
+  "subject": "Core English",
+  "version": "0.0.1",
+  "locales": {
+    "en-GB": {
+      "phrases": {
+        "_imperial_gallons": "Gallons",
+        "_Imp_Gal": "Gal",
+        "_Imperial_Gallons_per_Hour": "Gallons per Hour",
+        "_Imp_Gal/hr": "Gal/hr"
+      }
+    },
+    "en-US": {
+      "parent": "en-GB",
+      "phrases": {
+        "_metre": "meter",
+        "_metres": "meters",
+        "_centimetre": "centimeter",
+        "_centimetres": "centimeters",
+        "_millimetre": "millimeter",
+        "_millimetres": "millimeters",
+        "_kilometre": "_kilometer",
+        "_kilometres": "kilometers",
+        "_ t": " metric ton",
+        "_cubic_metres": "cubic meters",
+        "_litre": "liter",
+        "_litres": "liters",
+        "_imperial_gallons": "imperial gallons"
+      }
+    },
+    "*": {
+      "displaySpecs": [
+        {
+          "manufacturer": "Yanmar",
+          "components": {
+            "alternator12V80A": {
+              "specifications": {
+                "_Power_Source/_Alternator/+": {
+                  "_qtyTemperature": {
+                    "display": {
+                      "min": 313.15,
+                      "max": 4523.15,
+                      "errorHigh": 600,
+                      "warnUpper": 381.15,
+                      "alertUpper": 388.15,
+                      "nominalMin": 298.15,
+                      "nominalMax": 358.15
+                    }
+                  }
+                },
+                "_Power_Source/_Alternator/+/_insOutput": {
+                  "_qtyVoltage": {
+                    "display": {
+                      "min": 8,
+                      "max": 16,
+                      "alertLower": 12.8,
+                      "warnLower": 13.5,
+                      "nominalMin": 13.9,
+                      "nominalMax": 14.8,
+                      "warnUpper": 15,
+                      "alertUpper": 15.5,
+                      "errorHigh": 50
+                    }
+                  },
+                  "_qtyElectric_Current": {
+                    "display": {
+                      "min": 0,
+                      "max": 100,
+                      "warnLower": 5,
+                      "warnUpper": 80,
+                      "alertUpper": 90,
+                      "errorHigh": 200
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "products": {
+            "6LPA": {
+              "models": [
+                "6LPA-DTE",
+                "6LPA-DTZE",
+                "6LPA-DTP",
+                "6LPA-DTZP",
+                "6LPA-STE",
+                "6LPA-STZE",
+                "6LPA-STP",
+                "6LPA-STP2",
+                "6LPA-STZP",
+                "6LPA-STZP2",
+                "6LPA-STZP3",
+                "6LPA-STC(Z)"
+              ],
+              "description": "Marine Diesel Engine",
+              "include": [
+                "alternator12V80A"
+              ],
+              "specifications": {
+                "_Motor/_insPropulsion/+": {
+                  "_qtyRevolution_Speed": {
+                    "display": {
+                      "max": 418.879020478638,
+                      "errorHigh": 500,
+                      "warnLower": 75.9218224617532,
+                      "warnUpper": 397.935069454705,
+                      "alertUpper": 450.818545790136
+                    }
+                  },
+                  "_qtyRuntime": {
+                    "display": {
+                      "unit": "hour"
+                    }
+                  }
+                },
+                "_Motor/_insPropulsion/+/_Coolant": {
+                  "_qtyTemperature": {
+                    "display": {
+                      "min": 313.15,
+                      "max": 393.15,
+                      "alertLower": 253.15,
+                      "warnLower": 268.15,
+                      "nominalMin": 341.15,
+                      "nominalMax": 363.15,
+                      "warnUpper": 368.15,
+                      "alertUpper": 373.15
+                    }
+                  },
+                  "_qtyPressure": {
+                    "display": {
+                      "max": 137888.2758,
+                      "warnUpper": 100000,
+                      "alertUpper": 110310.6206
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
