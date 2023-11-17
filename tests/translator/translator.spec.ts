@@ -8,7 +8,7 @@ describe('Translator', () => {
     expect(translator.lookup('en-US', '_metre')).to.equal('meter');
   });
   it('should keep a trace of the source', () => {
-    expect(translator.trace('en-US', '_imperial_gallons')).to.equal('Gallons (tests\\translator\\en.locale.json:en-GB)\nimperial gallons (tests\\translator\\en.locale.json:en-US)\nWonderful Gallons (tests\\translator\\2.locale.json:en-US)\n');
+    expect(translator.trace('en-US', '_imperial_gallons')).to.equal('Gallons (tests/translator/en.locale.json:en-GB)\nimperial gallons (tests/translator/en.locale.json:en-US)\nWonderful Gallons (tests/translator/2.locale.json:en-US)\n');
   });
   it('should fallback correctly', () => {
     expect(translator.lookup('en-US', '_a_test_phrase')).to.equal('a test phrase');

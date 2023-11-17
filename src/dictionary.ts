@@ -99,7 +99,8 @@ export class Dictionary {
     // build the trace
     let output = '';
     this._phrases[phrase].trace.forEach((source) => {
-      output += `${source.value} (${source.source})\n`;
+      // always return Linux style path separators ie / even if in windows
+      output += `${source.value} (${source.source.replace(/\\/g, '/')})\n`;
     });
     return output;
   }
