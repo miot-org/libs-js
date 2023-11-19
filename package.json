@@ -1,6 +1,6 @@
 {
   "name": "@ortac/libs-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A collection of library functions useful for Ortac development in javascript and typescript",
   "type": "module",
   "main": "./lib/cjs/index.js",
@@ -26,7 +26,7 @@
     "url": "git+https://github.com/ortac-org/libs-js.git"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "scripts": {
     "build": "node ./scripts/rm-rf.js ./lib && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node ./scripts/post-build.js",
