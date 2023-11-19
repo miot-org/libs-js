@@ -9,7 +9,7 @@ import {log} from './index.js';
  * ```js
  * import {Translator} from '@ortac/libs-js';
  *
- * const translator = new Translator([{pattern: './**&#8205;/localeFiles*.json'}]);
+ * const translator = new Translator([{pattern: './**‍/localeFiles*.json'}]);
  *
  * console.log(translator.lookup('en-US', '_metres')); // => 'meters'
  * ```

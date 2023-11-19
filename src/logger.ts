@@ -21,20 +21,56 @@ const PERMITTED_LOG_LEVELS = {
 } as const;
 
 /**
- * Global object to facilitate logging
+ * Logger provides a way to annotate code to provide logging, but also allows logging to be turned off (or
+ * down) depending on requirements.
  *
  * The Log Level (detail of logging reported) is taken from command line argument eg.
- * ```
+ * ```cmd
  * --loglevel warn
  * ```
  * or can be selected in code with log.setLevel()
  *
- * @example
+ * Example:
  * ```js
  * import {log} from 'libs-js';
  *
  * log.warn('Something not quite going to plan');
  * log.success('Completed', 'sorting');
+ * ```
+ *
+ * <b>Using logger in your code:</b>
+ *
+ * Place log messages at the appropriate level throughout your code. If they don't log anything, they will run very quickly.
+ *
+ * ```js
+ * import {log} from '@ortac/libs-js';
+ *
+ * log.warn('file failed to download');
+ * log.success('task completed');
+ * const i = 5;
+ * log.debug('i:', i);
+ * ```
+ *
+ * Assuming your application is started with a logging level of 'warn' or 2, the following will be output from the above code:
+ * <pre style="background-color: Black; color: White">
+ *   0:00:00.071 <span style="color:yellow;">⚠</span> file failed to download
+ * </pre>
+ *
+ * Whereas if your application is started with a logging level of 'debug' or 5:
+ *
+ * <pre style="background-color: Black; color: White">
+ *   0:00:00.071 <span style="color:yellow;">⚠</span> file failed to download
+ *   0:00:00.074 <span style="color:green;">✔</span> task completed
+ *   0:00:00.074 <span style="color:cyan;">●</span> i: 5
+ * </pre>
+ *
+ * <b>Initialising log level on the command line</b>
+ *
+ * When you start your code, the command line setting will determine the logging level. If none is set on the command line the default is 2 (warn) if in a 'production' environment, or 3 (info/success) if not.
+ *
+ * ```cmd
+ * > node ./src/temp.js --loglevel 2
+ * > node ./src/temp.js --loglevel debug
  * ```
  */
 export const log = {
