@@ -1,6 +1,6 @@
 {
   "name": "@ortac/libs-js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A collection of library functions useful for Ortac development in javascript and typescript",
   "type": "module",
   "main": "./lib/cjs/index.js",
