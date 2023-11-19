@@ -5,7 +5,18 @@ import {Dictionary} from './dictionary.js';
 import {log} from './index.js';
 
 /**
- * A Translation Class allowing phrases to be looked up for any given locale
+ * The Translator Class provides translations of phrases used in ortac systems across multiple locales.
+ * ```js
+ * import {Translator} from '@ortac/libs-js';
+ *
+ * const translator = new Translator([{pattern: './**&#8205;/localeFiles*.json'}]);
+ *
+ * console.log(translator.lookup('en-US', '_metres')); // => 'meters'
+ * ```
+ *
+ * The Translator Class uses locale files per the ortac specification, currently supporting v1.0.0. The
+ * Class also provides for the ability to trace where the source of a particular translation has come from,
+ * and can also log all phrases passed into the translator.
  */
 export class Translator {
   private readonly _dictionaries: {[locale: string]: Dictionary;} = {};

@@ -33,7 +33,16 @@ log.info('Completed something');
 
 ## API Reference
 
+Documentation can be found at:
+
+- [Argv](https://ortac-org.github.io/libs-js/docs/functions/argv.html)
+- [Config](https://ortac-org.github.io/libs-js/docs/variables/config.html)
+- [Logger](https://ortac-org.github.io/libs-js/docs/variables/log.html)
+- [Translator](https://ortac-org.github.io/libs-js/docs/classes/Translator.html)
+
 ### Argv
+
+
 
 The argv function extracts values passed in via the command line
 
