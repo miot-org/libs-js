@@ -4,25 +4,33 @@ on:
   push:
 
 jobs:
-  build:
-    
+  build: 
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: write
-      id-token: write
     
     steps:
       - uses: actions/checkout@v4
       - run: npm ci
       - run: npm run docs
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-      - name: Upload Documentation
-        uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v1
         with:
           name: docs
           path: ./docs
-      - name: Deploy Documentation to github Pages
+
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:        
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
