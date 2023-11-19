@@ -11,6 +11,12 @@ jobs:
     permissions:
       contents: read
       packages: write
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
       - uses: actions/checkout@v4
@@ -38,3 +44,11 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_PACKAGES_TOKEN }}
+      # publish pages
+      - run: npm run docs
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
