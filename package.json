@@ -30,6 +30,7 @@
   },
   "scripts": {
     "build": "node ./scripts/rm-rf.js ./lib && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node ./scripts/post-build.js",
+    "docs": "typedoc --excludePrivate --includeVersion --out docs src/index.ts",
     "spellcheck": "cspell **/* --dot",
     "mocha": "mocha --loader=ts-node/esm -r ts-node/register -exclude tests/**/*.slow.spec.ts tests/**/*.spec.ts",
     "mocha:all": "mocha --loader=ts-node/esm -r ts-node/register tests/**/*.spec.ts",
